@@ -110,8 +110,9 @@ class CliView:
             attr = curses.color_pair(COLORS["TASK"]) | curses.A_BOLD
             self.screen.addstr(start_y, task_area_start, "ID", attr)
             self.screen.addstr(start_y, task_area_start + 5, "Title", attr)
+            self.screen.addstr(start_y, task_area_start + 30, "Description", attr)
             if show_status:
-                self.screen.addstr(start_y, task_area_start + 30, "Status", attr)
+                self.screen.addstr(start_y, task_area_start + 60, "Status", attr)
 
         # Display tasks
         for i, task in enumerate(tasks):
@@ -135,12 +136,25 @@ class CliView:
                 curses.color_pair(color)
             )
 
+            # Display task description snippet (with truncation if needed)
+            description = task.description
+            max_desc_len = 25  # Limited space for description preview
+            if len(description) > max_desc_len:
+                description = description[:max_desc_len - 3] + "..."
+            elif not description:  # If description is empty, use a placeholder
+                description = "(no description)"
+
+            self.screen.addstr(
+                display_y, task_area_start + 30, description,
+                curses.color_pair(color)
+            )
+
             # Display status if requested
             if show_status:
                 status_text = "[completed] ✓" if task.status else "[incomplete]"
                 color = COLORS["COMPLETED"] if task.status else COLORS["TASK"]
                 self.screen.addstr(
-                    display_y, task_area_start + 30, status_text,
+                    display_y, task_area_start + 60, status_text,
                     curses.color_pair(color)
                 )
 

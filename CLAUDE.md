@@ -208,3 +208,10 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- Python 3.13+ (as specified in constitution) + curses library (part of Python standard library), UV for dependency management (001-interactive-todo-app)
+- In-memory only (Python objects/dictionaries as specified in requirements) (001-interactive-todo-app)
+
+## Recent Changes
+- 001-interactive-todo-app: Added Python 3.13+ (as specified in constitution) + curses library (part of Python standard library), UV for dependency management

@@ -44,8 +44,13 @@ class AppController:
         self.cli_view.clear_screen()
         self.cli_view.display_header()
 
+        # Always show the menu on the left side
+        self.display_main_menu()
+
+        # Show tasks on the right side based on current view
         if self.cli_view.current_view == "main_menu":
-            self.display_main_menu()
+            # When on main menu, show pending tasks on the right
+            self.display_tasks(self.task_manager.get_pending_tasks())
         elif self.cli_view.current_view == "view_all_tasks":
             self.display_tasks(self.task_manager.get_all_tasks())
         elif self.cli_view.current_view == "view_pending_tasks":
